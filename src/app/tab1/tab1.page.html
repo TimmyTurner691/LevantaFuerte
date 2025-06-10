@@ -1,0 +1,38 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>
+      Menu Principal
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Rutina de Hoy</ion-title>
+    </ion-toolbar>
+  </ion-header> 
+
+  <ion-card *ngFor="let ejercicio of ejercicios; let ejIndex = index">
+    <ion-card-header>
+      <ion-card-title>{{ ejercicio.nombre }}</ion-card-title>
+      <ion-card-subtitle>{{ ejercicio.peso }} kg</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div class="sets-container">
+        <div 
+          *ngFor="let set of ejercicio.sets; let i = index"
+          class="set-circle"
+          [class.completed]="set.activo"
+          (click)="clickEnSet(ejercicio, i, ejIndex)">
+          {{ set.reps }}
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+
+  <div *ngIf="timerVisible" class="timer-container">
+  {{ formatTime(timerValue) }}
+  </div>
+</ion-content>

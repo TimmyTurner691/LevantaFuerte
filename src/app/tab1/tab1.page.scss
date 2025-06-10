@@ -1,0 +1,44 @@
+.sets-container {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-start;
+  margin-top: 10px;
+}
+
+.set-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.set-circle.completed {
+  background-color: #4caf50;
+  color: white;
+}
+
+.timer-container {
+  position: fixed;
+  bottom: 20px;
+  width: 100%;
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #00ffcc;
+  background: rgba(0, 0, 0, 0.9); 
+  padding: 12px 0;
+  border-radius: 10px;
+  margin: 0 auto;
+  box-shadow: 0 0 12px rgba(0, 255, 204, 0.6);
+  max-width: 200px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1000;
+}
