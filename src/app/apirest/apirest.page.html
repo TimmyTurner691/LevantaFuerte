@@ -1,0 +1,32 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>Selecciona un País</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="ion-padding">
+  <ion-spinner *ngIf="cargando" name="dots" color="primary"></ion-spinner>
+
+  <ion-grid *ngIf="!cargando">
+    <ion-row>
+      <ion-col size="12" *ngFor="let country of countries">
+        <ion-button
+          expand="block"
+          (click)="seleccionarPais(country)"
+          class="pais-button"
+        >
+          <ion-img
+            [src]="country.flags?.png"
+            class="flag-icon"
+            slot="start"
+          ></ion-img>
+          <div class="pais-nombre">{{ country.name.common }}</div>
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-text *ngIf="!cargando && countries.length === 0">
+    <p>No se encontraron países</p>
+  </ion-text>
+</ion-content>

@@ -16,8 +16,20 @@ const routes: Routes = [
   loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
 },
   {
-    path: 'detalle-ejercicio',
-    loadChildren: () => import('./detalle-ejercicio/detalle-ejercicio.module').then( m => m.DetalleEjercicioPageModule)
+    path: 'apirest',
+    loadChildren: () => import('./apirest/apirest.module').then( m => m.ApirestPageModule)
+  },
+  {
+    path: 'agregar',
+    loadChildren: () => import('./agregar/agregar.module').then( m => m.AgregarPageModule)
+  },
+  {
+    path: 'listar',
+    loadChildren: () => import('./listar/listar.module').then( m => m.ListarPageModule)
+  },
+  {
+    path: 'modificar',
+    loadChildren: () => import('./modificar/modificar.module').then( m => m.ModificarPageModule)
   },
 ];
 @NgModule({

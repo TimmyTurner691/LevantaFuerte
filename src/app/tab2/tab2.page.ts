@@ -1,10 +1,8 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router'
-
-interface EjercicioDisponible {
-  nombre: string;
-  descripcion: string;
-}
+import { Component, OnInit } from '@angular/core';
+import { DatabaseService } from '../services/database.service';
+import { EjercicioService } from '../services/ejercicios.service';
+import { Ejercicios } from '../services/ejercicios';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tab2',
@@ -12,17 +10,33 @@ interface EjercicioDisponible {
   styleUrls: ['tab2.page.scss'],
   standalone: false,
 })
-export class Tab2Page {
-  ejerciciosDisponibles: EjercicioDisponible[] = [
-    { nombre: 'Peso Muerto', descripcion: 'Ejercicio de espalda baja y fuerza general.' },
-    { nombre: 'Press Militar', descripcion: 'Ejercicio para hombros y tríceps.' },
-    { nombre: 'Dominadas', descripcion: 'Ejercicio de espalda y bíceps.' },
-    
-  ];
+export class Tab2Page implements OnInit {
+  ejercicios: Ejercicios[] = [];
 
-  constructor(private router: Router) {}
+  constructor(
+    private db: DatabaseService,
+    private ejercicioService: EjercicioService,
+    private router: Router
+  ) {}
 
-  seleccionarEjercicio(ejercicio: EjercicioDisponible) {
-    this.router.navigate(['/detalle-ejercicio'], { state: { ejercicio } });
+  ngOnInit() {
+    this.db.dbState().subscribe(ready => {
+      if (ready) {
+        this.db.fetchNoticias().subscribe(data => {
+          this.ejercicios = data;
+        });
+      }
+    });
   }
+
+  seleccionarEjercicio(ejercicio: Ejercicios) {
+  this.ejercicioService.agregarEjercicio({
+    nombre: ejercicio.titulo,
+    descripcion: ejercicio.descripcion,
+    peso: 20,
+    sets: Array(5).fill({ reps: 5, activo: false })
+  });
+
+  this.router.navigate(['/tabs/tab1']);
+}
 }

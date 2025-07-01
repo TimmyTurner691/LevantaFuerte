@@ -14,13 +14,13 @@ export class LoginPage {
   constructor(private fb: FormBuilder, private router: Router) {
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
     });
   }
 
   login() {
     if (this.loginForm.valid) {
-      this.router.navigate(['/tabs']);
+      this.router.navigate(['/apirest']);
     }
   }
 }
